@@ -18,7 +18,12 @@ mongoose
 
 app.use(express.json());
 app.use('/api/products', productsRoutes);
+app.get('/', (req, res) => {
+  res.send('Hello world!');
+});
 
 app.listen(PORT, () => {
   console.log(`Running on PORT: ${PORT}`);
 });
+
+module.exports = app;

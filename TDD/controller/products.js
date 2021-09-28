@@ -1,6 +1,10 @@
 const ProductModel = require('../models/Product');
 
-exports.createProduct = (req, res, next) => {
-  const createdProduct = ProductModel.create(req.body);
-  res.status(201).json(createdProduct);
+exports.createProduct = async (req, res, next) => {
+  try {
+    const createdProduct = await ProductModel.create(req.body);
+    res.status(201).json(createdProduct);
+  } catch (error) {
+    next(error);
+  }
 };
