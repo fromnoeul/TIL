@@ -1,18 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const productsRoutes = require('./routes.js');
+require('dotenv').config();
 
 const PORT = 5000;
 const app = express();
 
 mongoose
-  .connect(
-    'mongodb+srv://fromnoeul:PcIHUXoruSZL4end@nestcluster.vr2uj.mongodb.net/tdd?authSource=admin&replicaSet=atlas-10cka6-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true',
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.MONGODB_KEY, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log('Mongodb connected...'))
   .catch(err => console.log(err));
 

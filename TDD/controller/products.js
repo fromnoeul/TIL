@@ -17,3 +17,24 @@ exports.getProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getProductById = async (req, res, next) => {
+  try {
+    const product = await ProductModel.findById(req.params.productId);
+    if (product !== null) {
+      res.status(200).json(product);
+    } else {
+      res.status(404).send();
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateProduct = async (req, res, next) => {
+  await ProductModel.findByIdAndUpdate(req.params.productId, req.body, {
+    new: true,
+  });
+  await ProductModel.find({});
+  res.send();
+};
